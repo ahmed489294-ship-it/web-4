@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ملخص النباتات – الصف الثامن</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap">
+<style>
+/* Layout: a deep-green school band with the gold logo on top, then a single reading column of lesson sheets; mind maps branch from a central node like a leaf vein. */
+:root{
+  --bg:#eef3ec; --surface:#ffffff; --surface-2:#f6f9f4; --ink:#16241c; --muted:#56695d;
+  --green:#1d5a42; --green-soft:#dcebe1; --gold:#b9830f; --gold-soft:#fbefd2; --line:#d3ded5;
+  --band:#123b2c; --band-ink:#f4efe0; --band-gold:#efb31f;
+  --ok:#2f7d4f; --bad:#b3412f;
+  --shadow:0 1px 2px rgba(18,59,44,.08),0 6px 18px rgba(18,59,44,.07);
+  --f-display:"Tajawal","Segoe UI",Tahoma,Arial,sans-serif;
+  --f-body:"Tajawal","Segoe UI",Tahoma,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0d1813; --surface:#14231b; --surface-2:#182a21; --ink:#e4ede6; --muted:#9db2a4;
+  --green:#5fb48a; --green-soft:#1d3a2c; --gold:#f0b72e; --gold-soft:#3a2f12; --line:#29402f;
+  --band:#0a2a1f; --band-ink:#f4efe0; --band-gold:#efb31f; --ok:#59b97f; --bad:#e2735f;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d1813; --surface:#14231b; --surface-2:#182a21; --ink:#e4ede6; --muted:#9db2a4;
+  --green:#5fb48a; --green-soft:#1d3a2c; --gold:#f0b72e; --gold-soft:#3a2f12; --line:#29402f;
+  --band:#0a2a1f; --band-ink:#f4efe0; --band-gold:#efb31f; --ok:#59b97f; --bad:#e2735f;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.75;direction:rtl;text-align:right;padding-bottom:44px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--band)}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.35;margin:0}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* home band */
+.band{background:var(--band);color:var(--band-ink);position:relative;overflow:hidden}
+.band::after{content:"";position:absolute;inset:auto -10% -60px -10%;height:120px;background:radial-gradient(60% 100% at 50% 0,rgba(239,179,31,.18),transparent 70%);pointer-events:none}
+.band .wrap{padding-block:28px 34px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;position:relative;z-index:1}
+.logo{width:118px;height:auto;filter:drop-shadow(0 4px 14px rgba(0,0,0,.35))}
+.school{font-family:var(--f-display);font-size:clamp(1.15rem,3.6vw,1.55rem);font-weight:600;color:var(--band-ink)}
+.school span{display:inline-block;direction:ltr;unicode-bidi:isolate;color:var(--band-gold);font-family:var(--f-body);font-weight:600;font-size:.85em;margin-inline-start:.3em}
+.title{font-size:clamp(1.45rem,5vw,2.3rem);font-weight:700;color:#fff;max-width:22ch}
+.title em{font-style:normal;color:var(--band-gold)}
+.slogan{display:inline-flex;align-items:center;gap:10px;font-size:1rem;color:var(--band-ink);opacity:.92;margin-top:2px}
+.slogan::before,.slogan::after{content:"";width:28px;height:1px;background:var(--band-gold)}
+
+/* home choices */
+.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;padding-block:30px 20px}
+.choice{display:flex;align-items:center;gap:18px;text-align:right;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);color:var(--ink);transition:transform .15s ease,border-color .15s ease}
+.choice:hover{transform:translateY(-2px);border-color:var(--gold)}
+.choice .ic{flex:none;width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:var(--green-soft);color:var(--green)}
+.choice.exam .ic{background:var(--gold-soft);color:var(--gold)}
+.choice .ic svg{width:38px;height:38px}
+.choice b{display:block;font-family:var(--f-display);font-size:1.35rem;font-weight:600}
+.choice small{display:block;color:var(--muted);font-size:.92rem;line-height:1.5}
+.unit-strip{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding-bottom:18px}
+.unit-strip span{font-size:.82rem;color:var(--muted);background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:2px 12px}
+
+/* top nav bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--band);color:var(--band-ink)}
+.bar .wrap{display:flex;align-items:center;gap:8px;padding-block:8px}
+.bar img{width:34px;height:auto}
+.bar .crumb{flex:1;min-width:0;font-family:var(--f-display);font-size:1.02rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nb{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(239,179,31,.45);background:transparent;color:var(--band-ink);border-radius:10px;padding:6px 12px;font-size:.92rem;font-weight:500}
+.nb:hover{background:rgba(239,179,31,.14)}
+.nb svg{width:18px;height:18px}
+.nb:disabled{opacity:.35;cursor:default}
+@media (max-width:560px){.nb .t{display:none}.nb{padding:7px 9px}}
+
+/* menu grids */
+.head{padding-block:26px 6px}
+.head h2{font-size:clamp(1.4rem,4vw,1.9rem);color:var(--green)}
+.head p{margin:.2rem 0 0;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;padding-block:16px 30px}
+.tile{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:right;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;color:var(--ink);box-shadow:var(--shadow);transition:border-color .15s,transform .15s}
+.tile:hover{border-color:var(--gold);transform:translateY(-2px)}
+.tile .num{font-family:var(--f-display);font-weight:700;font-size:1rem;color:var(--gold);background:var(--gold-soft);border-radius:8px;padding:0 10px;font-variant-numeric:tabular-nums}
+.tile b{font-family:var(--f-display);font-size:1.15rem;font-weight:600}
+.tile small{color:var(--muted);font-size:.86rem;line-height:1.5}
+.subhead{font-family:var(--f-display);font-size:1.15rem;color:var(--green);margin-top:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding-block:10px 30px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 14px;font-size:.92rem}
+.chip:hover{border-color:var(--green)}
+.chip i{font-style:normal;color:var(--muted);font-size:.8rem;margin-inline-start:4px}
+
+/* lesson sheet */
+.sheet{padding-block:22px 34px;display:flex;flex-direction:column;gap:20px}
+.lhead{display:flex;align-items:center;gap:14px}
+.lhead .num{font-family:var(--f-display);font-size:1.5rem;font-weight:700;color:var(--band-gold);background:var(--band);border-radius:14px;padding:4px 14px;font-variant-numeric:tabular-nums}
+.lhead h2{font-size:clamp(1.45rem,4.4vw,2rem);color:var(--green)}
+.sec{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow)}
+.sec>h3{font-size:1.15rem;color:var(--green);display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.sec>h3::before{content:"";width:10px;height:10px;border-radius:50% 0;background:var(--gold);transform:rotate(45deg)}
+.pts{margin:0;padding:0 1.1rem 0 0;display:flex;flex-direction:column;gap:6px}
+.pts li::marker{color:var(--gold)}
+.pts b{color:var(--green)}
+.key{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-top:4px}
+.key div{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;line-height:1.6}
+.key div b{display:block;font-family:var(--f-display);color:var(--gold);font-weight:600}
+.eq{direction:rtl;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;background:var(--gold-soft);border:1px dashed var(--gold);border-radius:14px;padding:14px;font-weight:700;font-size:1.08rem;text-align:center}
+.eq .arr{display:inline-flex;flex-direction:column;align-items:center;font-size:.78rem;font-weight:500;color:var(--muted);line-height:1.2}
+.eq .arr b{font-size:1.9rem;line-height:.9;color:var(--ink);font-weight:400}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:420px;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:right;vertical-align:top}
+th{background:var(--green-soft);color:var(--green);font-family:var(--f-display);font-weight:600}
+.note{border-inline-start:4px solid var(--gold);background:var(--surface-2);padding:10px 14px;border-radius:8px;margin-top:10px}
+
+/* mind map */
+.mm{display:flex;flex-direction:column;align-items:center;gap:0}
+.mm .root{background:var(--band);color:var(--band-gold);font-family:var(--f-display);font-size:1.2rem;font-weight:700;padding:10px 24px;border-radius:999px;position:relative;z-index:1;text-align:center}
+.mm .stem{width:2px;height:22px;background:var(--gold)}
+.mm .branches{width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;border-top:2px solid var(--gold);padding-top:18px;position:relative}
+.mm .br{position:relative;background:var(--surface-2);border:1.5px solid var(--green);border-radius:14px;padding:10px 12px}
+.mm .br::before{content:"";position:absolute;top:-20px;right:50%;width:2px;height:18px;background:var(--gold)}
+.mm .br h4{margin:0 0 4px;font-family:var(--f-display);font-weight:600;color:var(--green);font-size:1rem}
+.mm .br ul{margin:0;padding:0 1rem 0 0;font-size:.9rem;line-height:1.6}
+.mm .br li::marker{color:var(--gold)}
+
+/* practice questions */
+.qs{display:flex;flex-direction:column;gap:12px}
+.q{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--surface-2)}
+.q p{margin:0 0 8px;font-weight:600}
+.q .opts{display:flex;flex-wrap:wrap;gap:8px}
+.q .opt{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:6px 14px;font-size:.95rem}
+.q .opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 16%,var(--surface));color:var(--ok);font-weight:700}
+.q .opt.no{border-color:var(--bad);color:var(--bad);text-decoration:line-through}
+.reveal{border:1px solid var(--green);background:transparent;color:var(--green);border-radius:10px;padding:5px 14px;font-size:.92rem;font-weight:600}
+.reveal[aria-expanded="true"]{background:var(--green);color:var(--surface)}
+.ans{margin-top:8px;border-inline-start:4px solid var(--ok);background:var(--surface);padding:8px 12px;border-radius:8px}
+
+/* exam questions */
+.xq{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.xq header{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.xq header b{font-family:var(--f-display);color:var(--green);font-size:1.05rem}
+.xq header .tag{font-size:.8rem;color:var(--gold);background:var(--gold-soft);border-radius:999px;padding:1px 10px}
+.xq header .src{font-size:.8rem;color:var(--muted);margin-inline-start:auto}
+.shot{display:block;width:100%;border:0;padding:0;background:#fff;cursor:zoom-in;position:relative}
+.shot img{display:block;width:100%;height:auto}
+.shot .zoom{position:absolute;left:10px;bottom:10px;background:rgba(18,59,44,.85);color:#fff;border-radius:8px;padding:3px 9px;font-size:.78rem;display:inline-flex;gap:4px;align-items:center}
+.xq .foot{padding:10px 14px;display:flex;flex-direction:column;gap:10px}
+.xq .ansbox{border:2px solid var(--ok);border-radius:12px;overflow:hidden}
+.xq .ansbox .lbl{background:var(--ok);color:#fff;font-size:.85rem;padding:2px 12px;font-weight:600}
+.xlist{display:flex;flex-direction:column;gap:18px;padding-block:18px 34px}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.exh{margin-top:22px;font-size:1.2rem;color:var(--green);padding-bottom:8px;border-bottom:2px solid var(--gold)}
+.exh span{color:var(--band-gold);background:var(--band);border-radius:8px;padding:0 10px;margin-inline-end:6px}
+.exsec .xlist{padding-block:14px 8px}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:50;background:rgba(6,16,11,.92);display:flex;flex-direction:column}
+.lb .lbbar{display:flex;gap:8px;justify-content:center;padding:calc(10px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px))}
+.lb .lbbar button{background:#1d5a42;color:#fff;border:1px solid #efb31f;border-radius:10px;padding:6px 14px;font-size:1rem;min-width:44px}
+.lb .stage{flex:1;overflow:auto;display:flex;justify-content:center;align-items:flex-start;padding:10px}
+.lb .stage img{max-width:none;background:#fff;border-radius:6px;transition:width .15s}
+
+.foot-credit{position:fixed;inset:auto 0 0 0;z-index:15;text-align:center;font-size:.76rem;color:var(--muted);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(4px);border-top:1px solid var(--line);padding:5px max(16px,env(safe-area-inset-right,0px)) calc(5px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));pointer-events:none}
+.foot-credit span{direction:ltr;unicode-bidi:isolate;font-weight:600;color:var(--green);pointer-events:auto;user-select:all}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+
+<div id="app"></div>
+<div class="foot-credit">إعداد: <span>ahmed.alabri01@moe.om</span></div>
+
+<script>
+document.documentElement.setAttribute('dir','rtl');document.documentElement.setAttribute('lang','ar');
+const EXAMS=[{"id":"A","title":"2026/2025 – الدور الأول (الفترة الصباحية)","qs":[{"n":"1","lesson":"1-1","q":"img/A_q1.jpg","a":"img/A_a1.jpg"},{"n":"2","lesson":"1-2","q":"img/A_q2.jpg","a":"img/A_a2.jpg"},{"n":"3","lesson":"1-4","q":"img/A_q3.jpg","a":"img/A_a3.jpg"},{"n":"4","lesson":"1-5","q":"img/A_q4.jpg","a":"img/A_a4.jpg"},{"n":"5","lesson":"1-7","q":"img/A_q5.jpg","a":"img/A_a5.jpg"}]},{"id":"B","title":"2026/2025 – الدور الأول (الفترة المسائية)","qs":[{"n":"1","lesson":"1-1","q":"img/B_q1.jpg","a":"img/B_a1.jpg"},{"n":"2","lesson":"1-2","q":"img/B_q2.jpg","a":"img/B_a2.jpg"},{"n":"3","lesson":"1-4","q":"img/B_q3.jpg","a":"img/B_a3.jpg"},{"n":"4","lesson":"1-6","q":"img/B_q4.jpg","a":"img/B_a4.jpg"},{"n":"5","lesson":"1-7","q":"img/B_q5.jpg","a":"img/B_a5.jpg"}]},{"id":"C","title":"2026/2025 – الدور الثاني","qs":[{"n":"1","lesson":"1-1","q":"img/C_q1.jpg","a":"img/C_a1.jpg"},{"n":"2","lesson":"1-2","q":"img/C_q2.jpg","a":"img/C_a2.jpg"},{"n":"3","lesson":"1-4","q":"img/C_q3.jpg","a":"img/C_a3.jpg"},{"n":"4","lesson":"1-5","q":"img/C_q4.jpg","a":"img/C_a4.jpg"},{"n":"5","lesson":"1-7","q":"img/C_q5.jpg","a":"img/C_a5.jpg"}]},{"id":"D","title":"2025/2024 – الدور الأول (الفترة الصباحية)","qs":[{"n":"1","lesson":"1-3","q":"img/D_q1.jpg","a":"img/D_a1.jpg"},{"n":"2","lesson":"1-1","q":"img/D_q2.jpg","a":"img/D_a2.jpg"},{"n":"3","lesson":"1-4","q":"img/D_q3.jpg","a":"img/D_a3.jpg"},{"n":"4","lesson":"1-3","q":"img/D_q4.jpg","a":"img/D_a4.jpg"},{"n":"5","lesson":"1-6","q":"img/D_q5.jpg","a":"img/D_a5.jpg"},{"n":"6","lesson":"1-2","q":"img/D_q6.jpg","a":"img/D_a6.jpg"},{"n":"7","lesson":"1-2","q":"img/D_q7.jpg","a":"img/D_a7.jpg"},{"n":"8","lesson":"1-5","q":"img/D_q8.jpg","a":"img/D_a8.jpg"}]},{"id":"E","title":"2025/2024 – الدور الأول (الفترة المسائية)","qs":[{"n":"1","lesson":"1-3","q":"img/E_q1.jpg","a":"img/E_a1.jpg"},{"n":"2","lesson":"1-5","q":"img/E_q2.jpg","a":"img/E_a2.jpg"},{"n":"3","lesson":"1-6","q":"img/E_q3.jpg","a":"img/E_a3.jpg"},{"n":"4","lesson":"1-2","q":"img/E_q4.jpg","a":"img/E_a4.jpg"},{"n":"5","lesson":"1-8","q":"img/E_q5.jpg","a":"img/E_a5.jpg"},{"n":"6","lesson":"1-4","q":"img/E_q6.jpg","a":"img/E_a6.jpg"},{"n":"7","lesson":"1-3","q":"img/E_q7.jpg","a":"img/E_a7.jpg"}]},{"id":"F","title":"2025/2024 – الدور الثاني","qs":[{"n":"1","lesson":"1-2","q":"img/F_q1.jpg","a":"img/F_a1.jpg"},{"n":"2","lesson":"1-3","q":"img/F_q2.jpg","a":"img/F_a2.jpg"},{"n":"3","lesson":"1-3","q":"img/F_q3.jpg","a":"img/F_a3.jpg"},{"n":"4","lesson":"1-3","q":"img/F_q4.jpg","a":"img/F_a4.jpg"},{"n":"5","lesson":"1-7","q":"img/F_q5.jpg","a":"img/F_a5.jpg"},{"n":"6","lesson":"1-2","q":"img/F_q6.jpg","a":"img/F_a6.jpg"}]},{"id":"G","title":"2024/2023 – الدور الأول (الفترة الصباحية)","qs":[{"n":"1","lesson":"1-3","q":"img/G_q1.jpg","a":"img/G_a1.jpg"},{"n":"2","lesson":"1-7","q":"img/G_q2.jpg","a":"img/G_a2.jpg"},{"n":"3","lesson":"1-4","q":"img/G_q3.jpg","a":"img/G_a3.jpg"},{"n":"4","lesson":"1-5","q":"img/G_q4.jpg","a":"img/G_a4.jpg"}]},{"id":"H","title":"2024/2023 – الدور الأول (الفترة المسائية)","qs":[{"n":"1","lesson":"1-2","q":"img/H_q1.jpg","a":"img/H_a1.jpg"},{"n":"2","lesson":"1-2","q":"img/H_q2.jpg","a":"img/H_a2.jpg"},{"n":"3","lesson":"1-6","q":"img/H_q3.jpg","a":"img/H_a3.jpg"},{"n":"4","lesson":"1-3","q":"img/H_q4.jpg","a":"img/H_a4.jpg"}]},{"id":"I","title":"2024/2023 – الدور الثاني","qs":[{"n":"1","lesson":"1-3","q":"img/I_q1.jpg","a":"img/I_a1.jpg"},{"n":"2","lesson":"1-6","q":"img/I_q2.jpg","a":"img/I_a2.jpg"},{"n":"3","lesson":"1-7","q":"img/I_q3.jpg","a":"img/I_a3.jpg"}]},{"id":"J","title":"2024/2023 – الدور الأول (محافظة الظاهرة)","qs":[{"n":"1-2","lesson":"1-2","q":"img/J_q1-2.jpg","a":"img/J_a1-2.jpg"},{"n":"3","lesson":"1-3","q":"img/J_q3.jpg","a":"img/J_a3.jpg"},{"n":"4","lesson":"1-6","q":"img/J_q4.jpg","a":"img/J_a4.jpg"},{"n":"5","lesson":"1-7","q":"img/J_q5.jpg","a":"img/J_a5.jpg"},{"n":"6","lesson":"1-3","q":"img/J_q6.jpg","a":"img/J_a6.jpg"}]},{"id":"K","title":"2024/2023 – الدور الأول (صباحي – نموذج آخر)","qs":[{"n":"1","lesson":"1-1","q":"img/K_q1.jpg","a":"img/K_a1.jpg"},{"n":"2","lesson":"1-1","q":"img/K_q2.jpg","a":"img/K_a2.jpg"},{"n":"3","lesson":"1-4","q":"img/K_q3.jpg","a":"img/K_a3.jpg"},{"n":"4","lesson":"1-2","q":"img/K_q4.jpg","a":"img/K_a4.jpg"},{"n":"5","lesson":"1-2","q":"img/K_q5.jpg","a":"img/K_a5.jpg"}]},{"id":"L","title":"2024/2023 – الدور الأول (مسائي – نموذج آخر)","qs":[{"n":"1","lesson":"1-7","q":"img/L_q1.jpg","a":"img/L_a1.jpg"},{"n":"2","lesson":"1-2","q":"img/L_q2.jpg","a":"img/L_a2.jpg"},{"n":"3","lesson":"1-6","q":"img/L_q3.jpg","a":"img/L_a3.jpg"},{"n":"4","lesson":"1-2","q":"img/L_q4.jpg","a":"img/L_a4.jpg"},{"n":"5","lesson":"1-7","q":"img/L_q5.jpg","a":"img/L_a5.jpg"}]}];
+const I={
+ back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>',
+ next:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>',
+ home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>',
+ leaf:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 40C8 20 20 8 40 8c0 20-12 32-32 32z"/><path d="M8 40L28 20M17 31h9M22 26v-8"/></svg>',
+ exam:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="6" width="28" height="36" rx="4"/><path d="M17 16h14M17 23h14M17 30h8"/><path d="M28 34l3 3 6-7"/></svg>',
+ zoom:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4M11 8v6M8 11h6"/></svg>'
+};
+
+/* ---------- lesson content ---------- */
+const LESSONS=[
+{id:'1-1',name:'التمثيل الضوئي',blurb:'كيف يصنع النبات غذاءه من الضوء',
+body:`
+<div class="sec"><h3>الفكرة الأساسية</h3><ul class="pts">
+<li>نحصل على الطاقة من الغذاء، وتنتقل الطاقة بين الكائنات الحية عبر <b>السلسلة الغذائية</b>، وكل سلسلة غذائية <b>تبدأ بنبات</b>.</li>
+<li>النباتات تحصل على الطاقة من <b>الضوء</b>، ثم تنقل جزءًا منها إلى الغذاء الذي تصنعه.</li>
+<li><b>التمثيل الضوئي:</b> العملية التي يصنع بها النبات غذاءه باستخدام الطاقة المستمدة من الضوء (Photo = ضوء، Synthesis = إنتاج).</li>
+</ul></div>
+<div class="sec"><h3>ماذا يحتاج النبات؟ وماذا ينتج؟</h3>
+<div class="key">
+<div><b>الماء</b>تمتصه الجذور من التربة.</div>
+<div><b>ثاني أكسيد الكربون</b>يدخل إلى الورقة من الهواء.</div>
+<div><b>طاقة الضوء</b>مصدرها الشمس أو مصباح.</div>
+<div><b>النواتج</b>غذاء (جلوكوز) + غاز الأكسجين.</div>
+</div>
+<p class="note">يتحوّل الماء وثاني أكسيد الكربون إلى غذاء وأكسجين باستخدام الطاقة المستمدة من الضوء.</p></div>
+<div class="sec"><h3>الكتلة الحيوية</h3><ul class="pts">
+<li>يستخدم النبات جزءًا من الغذاء الذي يصنعه في إنتاج خلايا وأنسجة جديدة.</li>
+<li><b>الكتلة الحيوية:</b> المواد المصنوعة من الأنسجة والخلايا الحية.</li>
+<li>في نشاط (النبات والضوء): البذور في الظلام تنمو صفراء ضعيفة؛ لأنها لا تصنع الكلوروفيل ولا تقوم بالتمثيل الضوئي. نضع المجموعتين في درجة حرارة متماثلة حتى يكون <b>الضوء هو المتغير الوحيد</b>.</li>
+</ul></div>`,
+map:{root:'التمثيل الضوئي',br:[
+ ['المعنى',['إنتاج الغذاء باستخدام الضوء','يحدث في النباتات']],
+ ['المتفاعلات',['الماء ← من التربة','ثاني أكسيد الكربون ← من الهواء']],
+ ['الطاقة',['طاقة الضوء','يمتصها الكلوروفيل']],
+ ['النواتج',['غذاء (جلوكوز)','غاز الأكسجين']],
+ ['الكتلة الحيوية',['خلايا وأنسجة جديدة','تُصنع من الغذاء']]]},
+qs:[
+ {q:'العملية التي يصنع بها النبات غذاءه باستخدام الطاقة المستمدة من الضوء هي:',o:['التنفس','التمثيل الضوئي','الهضم','النقل'],a:1},
+ {q:'في السلسلة الغذائية: عشب ← جندب ← عنكبوت ← طائر صغير ← صقر، الكائن الذي يقوم بالتمثيل الضوئي هو:',o:['الصقر','الجندب','العشب','العنكبوت'],a:2},
+ {q:'إحدى المواد الآتية يحتاجها النبات للقيام بالتمثيل الضوئي:',o:['الماء','النشا','الهيدروجين','الجلوكوز'],a:0},
+ {q:'ما المقصود بالكتلة الحيوية؟',t:'المواد المصنوعة من الأنسجة والخلايا الحية، ويتحول إليها جزء من الغذاء الذي يصنعه النبات.'},
+ {q:'علّل: وضع مجموعتي النباتات في درجة حرارة متماثلة في نشاط (النبات والضوء).',t:'حتى يكون الضوء هو المتغير الوحيد المؤثر، فتكون التجربة عادلة.'}]},
+
+{id:'1-2',name:'أوراق النبات',blurb:'تكيّف الورقة من الخارج والداخل',
+body:`
+<div class="sec"><h3>الورقة والكلوروفيل</h3><ul class="pts">
+<li>الورقة هي العضو الذي يحدث فيه التمثيل الضوئي في معظم النباتات.</li>
+<li>تتلون الأوراق بالأخضر لاحتواء خلاياها على صبغة خضراء تسمى <b>الكلوروفيل (اليخضور)</b> توجد داخل <b>البلاستيدات الخضراء</b>.</li>
+<li>يمتص الكلوروفيل الطاقة من الضوء، وتستخدمها الورقة في صنع الغذاء.</li>
+<li>الجذور لا تتلون بالأخضر لأنها لا تحتوي على كلوروفيل ولا تتعرض للضوء.</li>
+</ul></div>
+<div class="sec"><h3>تكيّف الورقة من الخارج</h3><div class="key">
+<div><b>رقيقة جدًا</b>حتى يصل الضوء إلى كل الخلايا بداخلها.</div>
+<div><b>العروق</b>تحمل الماء إلى خلايا الورقة، وتدعمها لتبقى مسطّحة.</div>
+<div><b>ساق الورقة (العنق)</b>تربط الورقة بالنبات.</div>
+<div><b>خضراء</b>لاحتوائها على الكلوروفيل الذي يمتص الضوء.</div>
+</div></div>
+<div class="sec"><h3>تركيب الورقة من الداخل (من الأعلى إلى الأسفل)</h3><div class="tbl"><table>
+<thead><tr><th>التركيب</th><th>الوظيفة / الصفة</th></tr></thead><tbody>
+<tr><td>الطبقة الشمعية</td><td>على سطح الورقة؛ تمنع خلايا الورقة من الجفاف.</td></tr>
+<tr><td>البشرة العليا</td><td>تحمي الخلايا داخل الورقة.</td></tr>
+<tr><td>النسيج الوسطي العمادي</td><td>خلايا متراصة غنية بالبلاستيدات؛ تقوم <b>بأغلب</b> عمل التمثيل الضوئي.</td></tr>
+<tr><td>النسيج الوسطي الإسفنجي</td><td>به فراغات هوائية كثيرة؛ يقوم بمقدار ضئيل من التمثيل الضوئي.</td></tr>
+<tr><td>عرق الورقة</td><td>يحمل الماء إلى خلايا الورقة.</td></tr>
+<tr><td>البشرة السفلى</td><td>تحمي الخلايا الموجودة داخل الورقة.</td></tr>
+<tr><td>الثغور</td><td>ثقوب صغيرة في البشرة السفلى؛ تسمح بدخول ثاني أكسيد الكربون من الهواء وتبادل الغازات.</td></tr>
+</tbody></table></div>
+<p class="note">عند غمس ورقة في ماء دافئ تظهر فقاعات أكثر على <b>السطح السفلي</b>؛ لأنه يحتوي على عدد أكبر من الثغور، والحرارة تجعل الغاز يتمدد ويخرج.</p></div>`,
+map:{root:'ورقة النبات',br:[
+ ['الكلوروفيل',['صبغة خضراء','في البلاستيدات','يمتص الضوء']],
+ ['من الخارج',['رقيقة ← وصول الضوء','عروق ← ماء ودعم','عنق ← ربط بالنبات']],
+ ['الطبقات العليا',['شمعية ← تمنع الجفاف','بشرة عليا ← حماية']],
+ ['النسيج الوسطي',['عمادي ← أغلب التمثيل','إسفنجي ← فراغات هوائية']],
+ ['الأسفل',['بشرة سفلى ← حماية','ثغور ← دخول CO₂']]]},
+qs:[
+ {q:'الطبقة التي تقوم بأغلب عمل التمثيل الضوئي في الورقة:',o:['البشرة العليا','النسيج الوسطي العمادي','النسيج الوسطي الإسفنجي','البشرة السفلى'],a:1},
+ {q:'تسمح الثغور بدخول:',o:['الماء','الأكسجين فقط','ثاني أكسيد الكربون','الأملاح المعدنية'],a:2},
+ {q:'ماذا يحدث لو أُزيلت الطبقة الشمعية من سطح الورقة؟',t:'تتعرض خلايا الورقة للجفاف بسبب فقد الماء بالتبخر.'},
+ {q:'فسّر: تتلون أوراق النبات بالأخضر بينما لا تتلون الجذور.',t:'الأوراق تحتوي على الكلوروفيل الأخضر، أما الجذور فلا تحتوي عليه.'},
+ {q:'أيّ سطحي الورقة تظهر عليه فقاعات أكثر عند وضعها في ماء دافئ؟ ولماذا؟',t:'السطح السفلي؛ لأنه يحتوي على عدد أكبر من الثغور التي يخرج منها الغاز.'}]},
+
+{id:'1-3',name:'المزيد حول التمثيل الضوئي',blurb:'المعادلة اللفظية، الجلوكوز والنشا',
+body:`
+<div class="sec"><h3>المعادلة اللفظية للتمثيل الضوئي</h3>
+<div class="eq"><span>ثاني أكسيد الكربون + ماء</span><span class="arr"><span>ضوء</span><b>⟵</b><span>كلوروفيل</span></span><span>جلوكوز + أكسجين</span></div>
+<ul class="pts" style="margin-top:12px">
+<li>السهم يعني «يتحوّل إلى». المواد قبل السهم <b>متفاعلات</b> وبعده <b>نواتج</b>.</li>
+<li>الغذاء الناتج سكر يسمى <b>الجلوكوز</b> (سكر العنب).</li>
+<li>يمتص الكلوروفيل الطاقة الضوئية، فتُخزّن في الجلوكوز على شكل <b>طاقة كيميائية كامنة</b>.</li>
+<li>يحدث التمثيل الضوئي داخل <b>البلاستيدات الخضراء</b> لأنها تحتوي على الكلوروفيل، وأكثرها في خلايا النسيج العمادي.</li>
+</ul></div>
+<div class="sec"><h3>تخزين الكربوهيدرات</h3><ul class="pts">
+<li>الجلوكوز سكر، والسكريات تنتمي إلى مجموعة <b>الكربوهيدرات</b>.</li>
+<li>يصنع النبات جلوكوز أكثر من حاجته، لكنه <b>لا يخزّنه</b> في صورة جلوكوز لأنه <b>قابل للذوبان في الماء</b>.</li>
+<li>يحوّل النبات جزءًا من الجلوكوز إلى <b>النشا</b>: آلاف من وحدات الجلوكوز المتصلة في سلسلة طويلة، <b>غير قابل للذوبان</b>، ويُخزّن حبيبات داخل البلاستيدات الخضراء.</li>
+</ul></div>
+<div class="sec"><h3>اختبار احتواء الورقة على نشا (محلول اليود)</h3><div class="tbl"><table>
+<thead><tr><th>الخطوة</th><th>السبب</th></tr></thead><tbody>
+<tr><td>غلي الورقة في الماء</td><td>تفكيك أغشية الخلايا حتى يصل اليود إلى النشا.</td></tr>
+<tr><td>إطفاء الموقد</td><td>الإيثانول مادة سريعة الاشتعال.</td></tr>
+<tr><td>وضع الورقة في إيثانول داخل حمام ماء ساخن</td><td>إزالة الكلوروفيل (اللون الأخضر) حتى يظهر تغيّر لون اليود بوضوح.</td></tr>
+<tr><td>غمس الورقة في الماء</td><td>تليينها لأن الإيثانول يجعلها هشّة.</td></tr>
+<tr><td>إضافة محلول اليود</td><td><b>أزرق مسودّ</b> = يوجد نشا. <b>بني مصفر</b> = لا يوجد نشا.</td></tr>
+</tbody></table></div>
+<p class="note">في الورقة المبرقشة: الجزء الأخضر يصبح أزرق مسودًا (فيه كلوروفيل ونشا)، والجزء الأبيض يبقى بنيًا مصفرًا (لا كلوروفيل ولا نشا). والنبات الموضوع مع مادة تمتص ثاني أكسيد الكربون لا يتكوّن فيه نشا.</p></div>`,
+map:{root:'المعادلة والنشا',br:[
+ ['المتفاعلات',['ثاني أكسيد الكربون','ماء']],
+ ['الشروط',['ضوء','كلوروفيل','البلاستيدات الخضراء']],
+ ['النواتج',['جلوكوز ← طاقة كيميائية','أكسجين']],
+ ['التخزين',['الجلوكوز يذوب ← لا يُخزّن','النشا لا يذوب ← يُخزّن']],
+ ['كشف النشا',['محلول اليود','أزرق مسودّ = نشا','بني مصفر = لا نشا']]]},
+qs:[
+ {q:'المعادلة اللفظية الصحيحة للتمثيل الضوئي:',o:['أكسجين + ماء ← ثاني أكسيد الكربون + جلوكوز','ثاني أكسيد الكربون + ماء ← جلوكوز + أكسجين','جلوكوز + ماء ← ثاني أكسيد الكربون + أكسجين','أكسجين + جلوكوز ← ماء + نيتروجين'],a:1},
+ {q:'شكل الطاقة المخزنة في جزيئات الجلوكوز:',o:['ضوئية','حرارية','كيميائية','حركية'],a:2},
+ {q:'لماذا يخزن النبات الغذاء في صورة نشا لا جلوكوز؟',t:'لأن الجلوكوز قابل للذوبان في الماء فيصعب تخزينه، أما النشا فغير قابل للذوبان.'},
+ {q:'لماذا تُزال الصبغة الخضراء من الورقة قبل إضافة اليود؟',t:'حتى يظهر تغيّر لون اليود بوضوح.'},
+ {q:'ما لون الجزء الأبيض من ورقة مبرقشة بعد إضافة اليود؟ فسّر.',t:'بني مصفر؛ لأنه لا يحتوي على كلوروفيل فلا يقوم بالتمثيل الضوئي ولا يتكون فيه نشا.'}]},
+
+{id:'1-4',name:'استقصاء التمثيل الضوئي',blurb:'الأكسجين وشدة الضوء',
+body:`
+<div class="sec"><h3>كيف نعرف أن الورقة تقوم بالتمثيل الضوئي؟</h3><ul class="pts">
+<li>نتحقق من إنتاجها <b>غاز الأكسجين</b> بوضع نبات مائي تحت الماء؛ فيتصاعد الأكسجين على شكل <b>فقاعات</b>.</li>
+<li>يُجمع الغاز بقمع مقلوب فوق النبات وأنبوبة اختبار مملوءة بالماء فوق القمع، ويُترك الجهاز في مكان مضيء ودافئ.</li>
+<li><b>الكشف عن الأكسجين:</b> تُدخل شظية خشبية متوهجة في الأنبوبة، فإذا اشتعلت بلهب فالغاز هو الأكسجين.</li>
+<li>نستخدم نباتًا مائيًا لأن فقاعات الغاز تظهر في الماء ويسهل جمعها وعدّها.</li>
+</ul></div>
+<div class="sec"><h3>أثر شدة الضوء على معدل التمثيل الضوئي</h3><ul class="pts">
+<li>نقيس المعدل بعدد <b>الفقاعات في الدقيقة</b> (أو حجم الغاز في زمن معين).</li>
+<li>كلما <b>اقترب المصباح</b> (زادت شدة الضوء) زاد عدد الفقاعات، أي زاد معدل التمثيل الضوئي.</li>
+<li>كلما <b>ابتعد المصباح</b> قلّت الفقاعات.</li>
+<li><b>الارتباط:</b> علاقة بين متغيرين؛ هنا ارتباط بين شدة الضوء ومعدل التمثيل الضوئي.</li>
+</ul>
+<div class="key" style="margin-top:10px">
+<div><b>المتغير المستقل</b>شدة الضوء (بُعد المصباح).</div>
+<div><b>المتغير التابع</b>عدد فقاعات الأكسجين في الدقيقة.</div>
+<div><b>متغيرات ثابتة</b>نوع النبات وحجمه، درجة الحرارة، كمية الماء، زمن العدّ.</div>
+<div><b>تحسين الدقة</b>تكرار التجربة وحساب المتوسط.</div>
+</div>
+<p class="note">درجة الحرارة أيضًا تؤثر على معدل التمثيل الضوئي.</p></div>`,
+map:{root:'استقصاء التمثيل',br:[
+ ['الدليل',['تصاعد فقاعات','غاز الأكسجين']],
+ ['الكشف',['شظية متوهجة','تشتعل بلهب']],
+ ['القياس',['عدد الفقاعات/دقيقة','حجم الغاز']],
+ ['شدة الضوء',['مصباح قريب ← فقاعات أكثر','مصباح بعيد ← فقاعات أقل']],
+ ['التجربة العادلة',['متغير مستقل واحد','تثبيت باقي المتغيرات','التكرار والمتوسط']]]},
+qs:[
+ {q:'الغاز المتصاعد من نبات مائي معرّض للضوء هو:',o:['ثاني أكسيد الكربون','النيتروجين','الأكسجين','الهيدروجين'],a:2},
+ {q:'عند إبعاد المصباح عن النبات المائي فإن عدد الفقاعات:',o:['يزيد','يقل','لا يتغير','يتوقف فورًا'],a:1},
+ {q:'كيف تتأكد أن الغاز المتجمع هو الأكسجين؟',t:'بإدخال شظية خشبية متوهجة في الأنبوبة؛ فتشتعل بلهب.'},
+ {q:'حدّد المتغير المستقل والتابع في تجربة أثر شدة الضوء على التمثيل الضوئي.',t:'المستقل: شدة الضوء (بُعد المصباح). التابع: عدد الفقاعات المتصاعدة في الدقيقة.'},
+ {q:'لماذا تُترك أدوات التجربة في مكان مضيء؟',t:'لأن النبات يحتاج الضوء للقيام بالتمثيل الضوئي وإنتاج الأكسجين.'}]},
+
+{id:'1-5',name:'الجذور',blurb:'وظائف الجذور والشعيرات الجذرية',
+body:`
+<div class="sec"><h3>وظائف الجذور</h3><div class="key">
+<div><b>الامتصاص والنقل</b>تمتص الماء والأملاح المعدنية من التربة وتنقلها لباقي أجزاء النبات.</div>
+<div><b>التثبيت</b>تعمل كدعامات تثبّت النبات في الأرض فلا يُقتلع بالرياح أو الحيوانات.</div>
+<div><b>تخزين الغذاء</b>مثل الجزر والشمندر والفجل والبطاطا الحلوة.</div>
+<div><b>البقاء في الظروف الصعبة</b>يبقى الجذر حيًا تحت الأرض، وينمو منه نبات جديد عند تحسّن الطقس.</div>
+</div></div>
+<div class="sec"><h3>كيف تمتص الجذور الماء والأملاح المعدنية؟</h3><ul class="pts">
+<li>يوجد الماء في الفراغات بين حبيبات التربة، وتذوب فيه الأملاح المعدنية.</li>
+<li><b>الشعيرات الجذرية:</b> خلايا خاصة تنمو من سطح الجذر، طويلة ورفيعة، توفّر <b>مساحة سطح كبيرة</b> لامتصاص كمية كبيرة من الماء والأملاح في وقت قصير.</li>
+<li>تموت معظم النباتات سريعًا عند اقتلاعها لأن الشعيرات الجذرية تتلف فلا تمتص الماء.</li>
+<li>امتصاص الجذور للماء يساعد على حدوث التمثيل الضوئي لأن الماء من متفاعلاته.</li>
+<li>تنمو الجذور دائمًا إلى <b>الأسفل</b> مهما كان اتجاه البذرة، فتصل إلى الماء وتثبّت النبات.</li>
+</ul></div>`,
+map:{root:'الجذور',br:[
+ ['الامتصاص',['الماء','الأملاح المعدنية']],
+ ['التثبيت',['دعامة في التربة','مقاومة الرياح']],
+ ['التخزين',['الجزر','الشمندر','البطاطا الحلوة']],
+ ['البقاء',['يعيش في الظروف القاسية','ينمو من جديد']],
+ ['الشعيرات الجذرية',['مساحة سطح كبيرة','امتصاص سريع']]]},
+qs:[
+ {q:'وظيفة الجذور التي يتميز بها نبات الجزر:',o:['امتصاص الضوء','تخزين الغذاء','صنع الكلوروفيل','تبادل الغازات'],a:1},
+ {q:'تمتص الجذور الماء والأملاح المعدنية من:',o:['الفراغات بين حبيبات التربة','الهواء','الأوراق','البلاستيدات'],a:0},
+ {q:'ما أهمية الشعيرات الجذرية؟',t:'تجعل مساحة السطح كبيرة لامتصاص الماء والأملاح المعدنية بسرعة.'},
+ {q:'اذكر وظيفتين للجذور.',t:'امتصاص الماء والأملاح المعدنية، وتثبيت النبات في الأرض (ومن الوظائف أيضًا تخزين الغذاء).'},
+ {q:'اقترح سبب موت معظم النباتات سريعًا عند اقتلاع جذورها.',t:'تتلف الشعيرات الجذرية فلا يستطيع النبات امتصاص الماء فيذبل ويموت.'}]},
+
+{id:'1-6',name:'نقل الماء والأملاح المعدنية',blurb:'الأنسجة الوعائية الخشبية',
+body:`
+<div class="sec"><h3>الأنسجة الوعائية الخشبية</h3><ul class="pts">
+<li>أنابيب طويلة <b>مجوّفة</b> دقيقة جدًا، تنقل الماء والأملاح المعدنية <b>من الجذور إلى الأوراق</b>.</li>
+<li>لها جدار صلب قوي يساعد على <b>دعم النبات</b> إضافة إلى النقل.</li>
+<li>الخشب في جذوع الأشجار يتكوّن من أوعية خشبية.</li>
+<li>تحتوي <b>عروق الورقة</b> على أنسجة وعائية خشبية.</li>
+</ul></div>
+<div class="sec"><h3>موقعها في أجزاء النبات (قطاع عرضي)</h3><div class="key">
+<div><b>في الجذر</b>في المركز على شكل نجمة (علامة +).</div>
+<div><b>في الساق</b>حزم مرتبة في حلقة قرب الأطراف.</div>
+<div><b>في الورقة</b>داخل العروق.</div>
+</div>
+<p class="note">في نشاط ساق الكرفس: الصبغة الملونة تصعد داخل الأنسجة الوعائية الخشبية فقط ولا تتوزع في كل الساق. ونغسل الساق قبل قطعه حتى لا تلوّث الصبغة الخارجية المقطع. وارتفاع درجة الحرارة يزيد معدل نقل الماء.</p></div>`,
+map:{root:'الأنسجة الوعائية الخشبية',br:[
+ ['الوصف',['أنابيب طويلة مجوّفة','جدار صلب']],
+ ['الوظيفة',['نقل الماء والأملاح','دعم النبات']],
+ ['الاتجاه',['من الجذور','إلى الأوراق']],
+ ['الموقع',['الجذر ← المركز','الساق ← حلقة','الورقة ← العروق']],
+ ['نشاط الكرفس',['الصبغة في الأوعية فقط','الحرارة تزيد السرعة']]]},
+qs:[
+ {q:'الجزء المسؤول عن نقل الماء والأملاح من الجذور إلى باقي أجزاء النبات:',o:['الثغور','البلاستيدات','الأنسجة الوعائية الخشبية','البشرة العليا'],a:2},
+ {q:'اتجاه انتقال الماء والأملاح في الأنسجة الوعائية الخشبية:',o:['من الأوراق إلى الجذور','من الجذور إلى الأوراق','من الساق إلى الجذور','من الأوراق إلى الساق'],a:1},
+ {q:'ما دور الأنسجة الوعائية الخشبية في النباتات الزهرية؟',t:'نقل الماء والأملاح المعدنية إلى أجزاء النبات، ودعم النبات.'},
+ {q:'أين توجد الأنسجة الوعائية الخشبية في الجذر وفي الساق؟',t:'في الجذر: في المركز. في الساق: في حزم على شكل حلقة قرب الأطراف.'},
+ {q:'صواب أم خطأ: معدل نقل الماء في ساق الكرفس في الماء الدافئ أسرع منه في البارد.',t:'صواب.'}]},
+
+{id:'1-7',name:'الأملاح المعدنية للنباتات',blurb:'النترات والماغنيسيوم والأسمدة',
+body:`
+<div class="sec"><h3>الأسمدة</h3><ul class="pts">
+<li>يضيف المزارعون <b>الأسمدة</b> إلى التربة لأنها توفّر <b>أملاحًا معدنية</b> تجعل النبات ينمو بحجم أكبر وصحة أفضل، فيزيد المحصول.</li>
+<li>الأموال التي يجنيها المزارع من المحصول الإضافي تفوق تكلفة الأسمدة.</li>
+<li>غالبًا لا تحتوي التربة على القدر الكافي من بعض الأملاح، مما يعيق النمو.</li>
+<li>يمتص النبات الأملاح المعدنية <b>ذائبة في الماء</b> عن طريق الشعيرات الجذرية.</li>
+</ul></div>
+<div class="sec"><h3>أهم الأملاح المعدنية</h3><div class="tbl"><table>
+<thead><tr><th>الملح</th><th>أهميته</th><th>أعراض نقصه</th></tr></thead><tbody>
+<tr><td><b>النترات</b></td><td>تكوين <b>البروتينات</b> اللازمة لبناء خلايا جديدة للنمو.</td><td>نبات صغير غير كامل النمو وأوراق صفراء.</td></tr>
+<tr><td><b>الماغنيسيوم</b></td><td>تكوين <b>الكلوروفيل</b>.</td><td>اصفرار الأوراق، فيقل معدل التمثيل الضوئي.</td></tr>
+</tbody></table></div>
+<p class="note"><b>قراءة الرسوم البيانية:</b> بزيادة كتلة السماد تزداد كتلة المحصول (علاقة طردية) حتى حدّ معين، ثم يثبت المحصول تقريبًا؛ فإضافة سماد أكثر بعدها لا تفيد وتهدر المال.</p></div>`,
+map:{root:'الأملاح المعدنية',br:[
+ ['الأسمدة',['تزيد المحصول','ربحها يفوق تكلفتها']],
+ ['النترات',['تكوين البروتينات','بناء خلايا جديدة']],
+ ['نقص النترات',['نبات صغير','أوراق صفراء']],
+ ['الماغنيسيوم',['تكوين الكلوروفيل','نقصه ← اصفرار الأوراق']],
+ ['الامتصاص',['ذائبة في الماء','عبر الشعيرات الجذرية']]]},
+qs:[
+ {q:'الملح الضروري لتكوين الكلوروفيل في أوراق النبات:',o:['النيتروجين','الفسفور','الماغنيسيوم','البوتاسيوم'],a:2},
+ {q:'الأملاح المعدنية التي تدخل في تكوين البروتينات اللازمة لنمو النبات:',o:['الماغنيسيوم','النترات','الكربونات','الكالسيوم'],a:1},
+ {q:'فسّر: عدم نمو النبات جيدًا إذا لم يحتوِ على القدر الكافي من النترات.',t:'لأنه لن يتمكن من تكوين البروتينات الكافية، فلا يبني خلايا جديدة للنمو.'},
+ {q:'ما العلاقة بين عدم استخدام سماد الماغنيسيوم واصفرار الأوراق؟',t:'الماغنيسيوم ضروري لتكوين الكلوروفيل المسؤول عن اللون الأخضر، فنقصه يجعل الأوراق صفراء.'},
+ {q:'لماذا ينصح خبراء الزراعة بعدم إضافة كميات كبيرة جدًا من السماد؟',t:'لأن المحصول يزداد حتى حدّ معين ثم يثبت، فتكون الزيادة قليلة جدًا وغير مجدية وتهدر المال.'}]},
+
+{id:'1-8',name:'النباتات والماء',blurb:'أربعة أسباب لحاجة النبات للماء',
+body:`
+<div class="sec"><h3>لماذا يحتاج النبات إلى الماء؟</h3><div class="key">
+<div><b>1. الدعم</b>الخلايا الممتلئة بالماء (خاصة الفجوات) قوية وثابتة ويضغط بعضها على بعض، فيبقى النبات مستقيمًا. نقص الماء يجعل الخلايا رخوة فـ<b>يذبل</b> النبات.</div>
+<div><b>2. نقل المواد الغذائية</b>تذوب الأملاح المعدنية في الماء وتنتقل معه في الأنسجة الوعائية الخشبية إلى جميع الأجزاء.</div>
+<div><b>3. التبريد</b>يتبخر الماء من الفراغات الهوائية في الورقة؛ فيمتص الطاقة الحرارية من الخلايا ويبرّدها. مهم للنباتات في البيئات الحارة.</div>
+<div><b>4. التمثيل الضوئي</b>يتحد الماء مع ثاني أكسيد الكربون داخل البلاستيدات الخضراء لإنتاج الجلوكوز والأكسجين.</div>
+</div></div>
+<div class="sec"><h3>رحلة الماء داخل النبات</h3>
+<div class="eq" style="font-size:.98rem;font-weight:600"><span>التربة</span><span>←</span><span>الشعيرات الجذرية</span><span>←</span><span>الأوعية الخشبية في الجذر والساق</span><span>←</span><span>عروق الورقة</span><span>←</span><span>خلايا الورقة والفراغات الهوائية</span><span>←</span><span>الثغور ← الهواء (بخار ماء)</span></div>
+<ul class="pts" style="margin-top:10px">
+<li>معظم الماء الذي تمتصه الجذور يُفقد في النهاية من الأوراق في صورة <b>بخار ماء</b>.</li>
+<li>نشاط فقدان الماء: النبات المغطى بكيس يفقد كتلة، وتظهر قطرات داخل الكيس. <b>ورقة كلوريد الكوبالت الزرقاء تتحول إلى الوردي</b> إذا كان السائل ماءً.</li>
+</ul></div>`,
+map:{root:'النبات والماء',br:[
+ ['الدعم',['خلايا ممتلئة وثابتة','نقصه ← الذبول']],
+ ['النقل',['يذيب الأملاح','في الأوعية الخشبية']],
+ ['التبريد',['تبخر من الورقة','يمتص الحرارة']],
+ ['التمثيل الضوئي',['ماء + CO₂','جلوكوز + أكسجين']],
+ ['خروج الماء',['من الثغور','بخار ماء','كلوريد الكوبالت ← وردي']]]},
+qs:[
+ {q:'يذبل النبات إذا لم يحصل على الماء لأن:',o:['خلاياه تصبح رخوة','الأوراق تزداد خضرة','الجذور تنمو للأعلى','النشا يزيد'],a:0},
+ {q:'يخرج الماء من الورقة على شكل بخار عن طريق:',o:['العروق','الثغور','البشرة العليا','الطبقة الشمعية'],a:1},
+ {q:'اذكر فائدتين للماء في النبات.',t:'دعم النبات، ونقل المواد الغذائية (والتبريد، والتمثيل الضوئي).'},
+ {q:'كيف يساعد الماء في الحفاظ على برودة النبات؟',t:'يتبخر الماء من الورقة فيمتص الطاقة الحرارية من خلاياها فتبرد.'},
+ {q:'كيف تتحقق أن القطرات داخل الكيس البلاستيكي ماء؟',t:'بلمسها بورقة كلوريد الكوبالت الزرقاء؛ فإن تحولت إلى الوردي فهي ماء.'}]}
+];
+
+/* ---------- state & navigation ---------- */
+const app=document.getElementById('app');
+let stack=[];
+function go(v,push=true){ if(push&&stack.length) stack.push(v); else if(push) stack=[v]; render(v); window.scrollTo(0,0);}
+function back(){ if(stack.length>1){stack.pop(); render(stack[stack.length-1]); window.scrollTo(0,0);} else home(); }
+function home(){ stack=[{v:'home'}]; render(stack[0]); window.scrollTo(0,0);}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+const lname=id=>(LESSONS.find(l=>l.id===id)||{}).name||id;
+
+function bar(crumb,nextFn,nextLabel='التالي'){
+  return `<div class="bar"><div class="wrap">
+  <img src="logo.png" alt="">
+  <div class="crumb">${crumb}</div>
+  <button class="nb" id="b-back" title="رجوع">${I.back}<span class="t">رجوع</span></button>
+  <button class="nb" id="b-home" title="الصفحة الرئيسية">${I.home}<span class="t">الرئيسية</span></button>
+  <button class="nb" id="b-next" title="${nextLabel}" ${nextFn?'':'disabled'}><span class="t">${nextLabel}</span>${I.next}</button>
+  </div></div>`;
+}
+let NEXT=null;
+function wireBar(){
+  const b=document.getElementById('b-back'); if(!b) return;
+  b.onclick=back; document.getElementById('b-home').onclick=home;
+  const n=document.getElementById('b-next'); n.onclick=()=>{ if(NEXT) NEXT(); };
+}
+
+function render(st){
+  NEXT=null;
+  if(st.v==='home') return renderHome();
+  if(st.v==='sum') return renderSumMenu();
+  if(st.v==='lesson') return renderLesson(st.i);
+  if(st.v==='exams') return renderExamMenu();
+  if(st.v==='exam') return renderExam(st.i);
+  if(st.v==='bylesson') return renderByLesson(st.id);
+}
+
+function renderHome(){
+  app.innerHTML=`
+  <header class="band"><div class="wrap">
+    <img class="logo" src="logo.png" alt="شعار مدرسة الفضل بن العباس">
+    <div class="school">مدرسة الفضل بن العباس للتعليم الأساسي <span>(7 – 10)</span></div>
+    <h1 class="title">ملخص واختبارات نهائية للوحدة الأولى <em>(النباتات)</em> للصف الثامن في مادة العلوم</h1>
+    <div class="slogan">الفضل متعة وإجادة علمية بشراكة مجتمعية</div>
+  </div></header>
+  <main class="wrap">
+    <div class="choices">
+      <button class="choice" id="go-sum"><span class="ic">${I.leaf}</span><span><b>ملخص الوحدة</b><small>8 دروس: ملخص مركّز، خريطة ذهنية، وأسئلة تدريبية لكل درس</small></span></button>
+      <button class="choice exam" id="go-ex"><span class="ic">${I.exam}</span><span><b>أسئلة اختبارات نهائية</b><small>${EXAMS.reduce((n,e)=>n+e.qs.length,0)} سؤالًا من ${EXAMS.length} اختبارًا نهائيًا مع نماذج الإجابة</small></span></button>
+    </div>
+    <div class="unit-strip">${LESSONS.map(l=>`<span>${l.id} ${l.name}</span>`).join('')}</div>
+  </main>`;
+  document.getElementById('go-sum').onclick=()=>go({v:'sum'});
+  document.getElementById('go-ex').onclick=()=>go({v:'exams'});
+}
+
+function renderSumMenu(){
+  NEXT=()=>go({v:'lesson',i:0});
+  app.innerHTML=bar('ملخص الوحدة الأولى',true,'الدرس الأول')+`
+  <main class="wrap"><div class="head"><h2>ملخص الوحدة الأولى: النباتات</h2><p>اختر الدرس لعرض الملخص والخريطة الذهنية والأسئلة.</p></div>
+  <div class="grid">${LESSONS.map((l,i)=>`<button class="tile" data-i="${i}"><span class="num">${l.id}</span><b>${l.name}</b><small>${l.blurb}</small></button>`).join('')}</div></main>`;
+  wireBar();
+  app.querySelectorAll('.tile').forEach(t=>t.onclick=()=>go({v:'lesson',i:+t.dataset.i}));
+}
+
+function mapHTML(m){
+  return `<div class="mm"><div class="root">${m.root}</div><div class="stem"></div>
+  <div class="branches">${m.br.map(([h,items])=>`<div class="br"><h4>${h}</h4><ul>${items.map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('')}</div></div>`;
+}
+function qsHTML(qs,pre){
+  return `<div class="qs">${qs.map((q,k)=>{
+    const id=pre+'-'+k;
+    if(q.o) return `<div class="q" data-a="${q.a}"><p>${k+1}) ${q.q}</p><div class="opts">${q.o.map((o,j)=>`<button class="opt" data-j="${j}">${o}</button>`).join('')}</div></div>`;
+    return `<div class="q"><p>${k+1}) ${q.q}</p><button class="reveal" aria-expanded="false" aria-controls="${id}">إظهار الإجابة</button><div class="ans" id="${id}" hidden>${q.t}</div></div>`;
+  }).join('')}</div>`;
+}
+function wireQs(root){
+  root.querySelectorAll('.q[data-a]').forEach(q=>{
+    const a=+q.dataset.a;
+    q.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+      q.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','no'));
+      const j=+b.dataset.j; if(j===a) b.classList.add('ok'); else { b.classList.add('no'); q.querySelector(`.opt[data-j="${a}"]`).classList.add('ok'); }
+    });
+  });
+  root.querySelectorAll('.reveal').forEach(b=>b.onclick=()=>{
+    const t=document.getElementById(b.getAttribute('aria-controls'));
+    const open=b.getAttribute('aria-expanded')!=='true';
+    b.setAttribute('aria-expanded',open); t.hidden=!open;
+    b.textContent=open?'إخفاء الإجابة':'إظهار الإجابة';
+    if(open){ t.querySelectorAll('img[data-src]').forEach(im=>{im.src=im.dataset.src; im.removeAttribute('data-src');}); }
+  });
+}
+
+function renderLesson(i){
+  const l=LESSONS[i];
+  NEXT= i<LESSONS.length-1 ? ()=>go({v:'lesson',i:i+1}) : ()=>go({v:'exams'});
+  app.innerHTML=bar(`ملخص الوحدة › <bdi>${l.id}</bdi> ${l.name}`,true, i<LESSONS.length-1?'الدرس التالي':'الاختبارات')+`
+  <main class="wrap sheet">
+    <div class="lhead"><span class="num">${l.id}</span><h2>${l.name}</h2></div>
+    ${l.body}
+    <div class="sec"><h3>الخريطة الذهنية</h3>${mapHTML(l.map)}</div>
+    <div class="sec"><h3>أسئلة تدريبية</h3>${qsHTML(l.qs,'L'+i)}</div>
+    <div class="tools"><button class="chip" id="to-ex">أسئلة الاختبارات النهائية على هذا الدرس <i>(${countLesson(l.id)})</i></button></div>
+  </main>`;
+  wireBar(); wireQs(app);
+  document.getElementById('to-ex').onclick=()=>go({v:'bylesson',id:l.id});
+}
+function countLesson(id){return EXAMS.reduce((n,e)=>n+e.qs.filter(q=>q.lesson===id).length,0);}
+
+function renderExamMenu(){
+  NEXT=()=>go({v:'sum'});
+  app.innerHTML=bar('أسئلة اختبارات نهائية',true,'ملخص الوحدة')+`
+  <main class="wrap"><div class="head"><h2>أسئلة الاختبارات النهائية – الوحدة الأولى</h2></div>
+  ${examTools()}
+  ${EXAMS.map((e,i)=>`<section class="exsec"><h3 class="exh"><span>اختبار ${i+1}</span> <bdi>${e.title}</bdi></h3><div class="xlist">${e.qs.map((q,k)=>xqHTML(q,e,k,false)).join('')}</div></section>`).join('')}
+  </main>`;
+  wireBar(); wireExam();
+}
+
+function xqHTML(q,e,k,showSrc){
+  const id=`A-${e.id}-${q.n}-${k}`;
+  return `<article class="xq">
+  <header><b>السؤال ${q.n}</b><span class="tag"><bdi>${q.lesson}</bdi> ${lname(q.lesson)}</span>${showSrc?`<span class="src">${e.title}</span>`:''}</header>
+  <button class="shot" data-zoom="${q.q}" aria-label="تكبير صورة السؤال"><img src="${q.q}" alt="السؤال ${q.n}" loading="lazy"><span class="zoom">${I.zoom} تكبير</span></button>
+  <div class="foot"><div><button class="reveal" aria-expanded="false" aria-controls="${id}">إظهار الإجابة</button></div>
+  <div class="ansbox" id="${id}" hidden><div class="lbl">الإجابة النموذجية</div><button class="shot" data-zoom="${q.a}" aria-label="تكبير صورة الإجابة"><img data-src="${q.a}" alt="إجابة السؤال ${q.n}"><span class="zoom">${I.zoom} تكبير</span></button></div></div>
+  </article>`;
+}
+function examTools(){
+  return `<div class="tools"><button class="chip" id="all-on">إظهار كل الإجابات</button><button class="chip" id="all-off">إخفاء كل الإجابات</button></div>`;
+}
+function wireExam(){
+  wireQs(app); wireZoom();
+  const set=open=>app.querySelectorAll('.reveal').forEach(b=>{ if((b.getAttribute('aria-expanded')==='true')!==open) b.click(); });
+  document.getElementById('all-on').onclick=()=>set(true);
+  document.getElementById('all-off').onclick=()=>set(false);
+}
+function renderExam(i){
+  const e=EXAMS[i];
+  NEXT= i<EXAMS.length-1 ? ()=>go({v:'exam',i:i+1}) : null;
+  app.innerHTML=bar(`اختبار ${i+1} › <bdi>${e.title}</bdi>`,!!NEXT,'الاختبار التالي')+`
+  <main class="wrap"><div class="head"><h2>اختبار ${i+1}</h2><p>${e.title} · أسئلة الوحدة الأولى (${e.qs.length})</p></div>
+  ${examTools()}
+  <div class="xlist">${e.qs.map((q,k)=>xqHTML(q,e,k,false)).join('')}</div></main>`;
+  wireBar(); wireExam();
+}
+function renderByLesson(id){
+  const li=LESSONS.findIndex(l=>l.id===id);
+  NEXT= li<LESSONS.length-1 ? ()=>go({v:'bylesson',id:LESSONS[li+1].id}) : null;
+  const items=[]; EXAMS.forEach(e=>e.qs.forEach(q=>{ if(q.lesson===id) items.push([q,e]); }));
+  app.innerHTML=bar(`أسئلة الدرس <bdi>${id}</bdi> ${lname(id)}`,!!NEXT,'الدرس التالي')+`
+  <main class="wrap"><div class="head"><h2>${id} ${lname(id)}</h2><p>${items.length} سؤالًا من الاختبارات النهائية على هذا الدرس.</p></div>
+  ${examTools()}
+  <div class="xlist">${items.map(([q,e],k)=>xqHTML(q,e,k,true)).join('')}</div></main>`;
+  wireBar(); wireExam();
+}
+
+/* ---------- lightbox ---------- */
+function wireZoom(){ app.querySelectorAll('.shot').forEach(s=>s.onclick=()=>openLB(s.dataset.zoom)); }
+function openLB(src){
+  const lb=document.createElement('div'); lb.className='lb'; lb.setAttribute('role','dialog');
+  lb.innerHTML=`<div class="lbbar"><button id="z-in" aria-label="تكبير">+</button><button id="z-out" aria-label="تصغير">−</button><button id="z-fit">ملاءمة</button><button id="z-x">إغلاق ✕</button></div><div class="stage"><img src="${src}" alt=""></div>`;
+  document.body.appendChild(lb);
+  const img=lb.querySelector('img'), stage=lb.querySelector('.stage');
+  let z=1; const fit=()=>stage.clientWidth-20;
+  const apply=()=>{ img.style.width=Math.round(fit()*z)+'px'; };
+  apply();
+  lb.querySelector('#z-in').onclick=()=>{z=Math.min(4,z+0.5);apply();};
+  lb.querySelector('#z-out').onclick=()=>{z=Math.max(0.5,z-0.5);apply();};
+  lb.querySelector('#z-fit').onclick=()=>{z=1;apply();};
+  const close=()=>{lb.remove();document.removeEventListener('keydown',kd);};
+  const kd=ev=>{ if(ev.key==='Escape') close(); };
+  document.addEventListener('keydown',kd);
+  lb.querySelector('#z-x').onclick=close;
+  stage.onclick=ev=>{ if(ev.target===stage) close(); };
+  img.ondblclick=()=>{ z = z>1 ? 1 : 2; apply(); };
+  lb.querySelector('#z-x').focus();
+}
+
+home();
+</script>
+
+<script>
+(function(){
+  var api=null;
+  function find(w){var n=0;while(w&&!w.API&&w.parent&&w.parent!==w&&n<10){w=w.parent;n++;}return w&&w.API?w.API:null;}
+  try{api=find(window)||(window.opener?find(window.opener):null);}catch(e){}
+  var done=false;
+  function start(){ if(!api) return; try{api.LMSInitialize("");var st=api.LMSGetValue("cmi.core.lesson_status");
+    if(st==="not attempted"||st===""){api.LMSSetValue("cmi.core.lesson_status","completed");}
+    api.LMSCommit("");}catch(e){} }
+  function finish(){ if(!api||done) return; done=true; try{api.LMSSetValue("cmi.core.exit","");api.LMSCommit("");api.LMSFinish("");}catch(e){} }
+  start(); window.addEventListener("beforeunload",finish); window.addEventListener("pagehide",finish);
+})();
+</script>
+</body>
+</html>
